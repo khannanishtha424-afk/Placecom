@@ -1,0 +1,476 @@
+{
+  "info": {
+    "name": "HSB Student Development Program (SDP) API Collection",
+    "description": "Comprehensive API collection for the HSB Student Development Program (SDP) Management System. Covers authentication, student portal, management dashboard, deadline revisions, business rules validations, and role-based access control.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:9000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "mgmt_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "student_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Login as Management (Placement Committee)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.expect(pm.response.code).to.eql(200);",
+                  "pm.expect(jsonData.role).to.eql('management');",
+                  "pm.collectionVariables.set('mgmt_token', jsonData.access_token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"placement@hsb.edu\",\n  \"password\": \"Admin@HSB2026\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login as Student (Student 1)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "pm.expect(pm.response.code).to.eql(200);",
+                  "pm.expect(jsonData.role).to.eql('student');",
+                  "pm.collectionVariables.set('student_token', jsonData.access_token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"student01@hsb.edu\",\n  \"password\": \"Student@HSB2026\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Current User Profile (/me)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{mgmt_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        },
+        {
+          "name": "Login with Invalid Password (Expect 401)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"student01@hsb.edu\",\n  \"password\": \"InvalidPass123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Reporting Periods",
+      "item": [
+        {
+          "name": "Get Reporting Periods (Oct 2026)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{student_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/periods?year=2026&month=10",
+              "host": ["{{base_url}}"],
+              "path": ["periods"],
+              "query": [
+                { "key": "year", "value": "2026" },
+                { "key": "month", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Active Period (/periods/current)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{student_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/periods/current",
+              "host": ["{{base_url}}"],
+              "path": ["periods", "current"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Student Portal Endpoints",
+      "item": [
+        {
+          "name": "Student Periods Overview (BR-UI-01)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{student_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/student/periods-overview?year=2026&month=10",
+              "host": ["{{base_url}}"],
+              "path": ["student", "periods-overview"],
+              "query": [
+                { "key": "year", "value": "2026" },
+                { "key": "month", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Student Week 3 Evaluation (BR-UI-02: 6 Attributes)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{student_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/student/periods/3/evaluation",
+              "host": ["{{base_url}}"],
+              "path": ["student", "periods", "3", "evaluation"]
+            }
+          }
+        },
+        {
+          "name": "Create Project Record (Valid)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{student_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attribute_type\": \"projects\",\n  \"period_id\": 3,\n  \"title\": \"Omnichannel Retail Inventory Model\",\n  \"description\": \"Safety stock calculation under demand volatility\",\n  \"start_date\": \"2026-10-01\",\n  \"planned_end_date\": \"2026-10-31\",\n  \"current_status\": \"In progress\",\n  \"progress_update\": \"Completed initial Monte Carlo simulations.\",\n  \"evidence_url\": \"https://github.com/hsb/retail-inventory-model\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/student/records",
+              "host": ["{{base_url}}"],
+              "path": ["student", "records"]
+            }
+          }
+        },
+        {
+          "name": "Validation Test: End Date Precedes Start Date (Expect 400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{student_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attribute_type\": \"projects\",\n  \"period_id\": 3,\n  \"title\": \"Invalid Dates Project\",\n  \"start_date\": \"2026-10-25\",\n  \"planned_end_date\": \"2026-10-10\",\n  \"current_status\": \"In progress\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/student/records",
+              "host": ["{{base_url}}"],
+              "path": ["student", "records"]
+            }
+          }
+        },
+        {
+          "name": "Validation Test: Completed Without Evidence (Expect 400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{student_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attribute_type\": \"certifications\",\n  \"period_id\": 3,\n  \"title\": \"PowerBI Advanced Analytics\",\n  \"provider\": \"Microsoft\",\n  \"start_date\": \"2026-10-01\",\n  \"planned_end_date\": \"2026-10-14\",\n  \"current_status\": \"Completed\",\n  \"certificate_url\": \"\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/student/records",
+              "host": ["{{base_url}}"],
+              "path": ["student", "records"]
+            }
+          }
+        },
+        {
+          "name": "Get Student Chronological History",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{student_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/student/history",
+              "host": ["{{base_url}}"],
+              "path": ["student", "history"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Management Dashboard Endpoints",
+      "item": [
+        {
+          "name": "Batch Summary Overview (BR-UI-05)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{mgmt_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/management/overview?period_id=3",
+              "host": ["{{base_url}}"],
+              "path": ["management", "overview"],
+              "query": [
+                { "key": "period_id", "value": "3" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Filtered Student Roster (BR-UI-06, BR-UI-12)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{mgmt_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/management/students?period_id=3&sort_by=overdue",
+              "host": ["{{base_url}}"],
+              "path": ["management", "students"],
+              "query": [
+                { "key": "period_id", "value": "3" },
+                { "key": "sort_by", "value": "overdue" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Student Drilldown Profile (BR-UI-08, BR-UI-09)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{mgmt_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/management/students/1?period_id=3",
+              "host": ["{{base_url}}"],
+              "path": ["management", "students", "1"],
+              "query": [
+                { "key": "period_id", "value": "3" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cohort Attribute Analysis (BR-UI-10)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{mgmt_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/management/attribute-analysis?attribute=projects&period_id=3",
+              "host": ["{{base_url}}"],
+              "path": ["management", "attribute-analysis"],
+              "query": [
+                { "key": "attribute", "value": "projects" },
+                { "key": "period_id", "value": "3" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Approve Deadline Revision (BR-12, BR-UI-11)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{mgmt_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"record_id\": 2,\n  \"new_deadline\": \"2026-11-10\",\n  \"reason\": \"Approved extension due to client delay in providing survey dataset.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/management/deadline-revisions",
+              "host": ["{{base_url}}"],
+              "path": ["management", "deadline-revisions"]
+            }
+          }
+        },
+        {
+          "name": "Manual Status Override (BR-UI-11)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{mgmt_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"record_id\": 2,\n  \"timeline_status\": \"green\",\n  \"reason\": \"Approved formal exemption granted by Faculty Placement Chair.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/management/manual-override",
+              "host": ["{{base_url}}"],
+              "path": ["management", "manual-override"]
+            }
+          }
+        },
+        {
+          "name": "Get Follow-Ups",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{mgmt_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/management/follow-ups",
+              "host": ["{{base_url}}"],
+              "path": ["management", "follow-ups"]
+            }
+          }
+        },
+        {
+          "name": "Create Follow-Up",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{mgmt_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"student_id\": 3,\n  \"attribute_type\": \"projects\",\n  \"comment\": \"Project is overdue by 5 days; no progress update recorded this week.\",\n  \"action_required\": \"Submit remedial milestone plan by Friday.\",\n  \"assigned_to\": \"Prof. A. Kapoor\",\n  \"next_review_date\": \"2026-10-20\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/management/follow-ups",
+              "host": ["{{base_url}}"],
+              "path": ["management", "follow-ups"]
+            }
+          }
+        },
+        {
+          "name": "Get Audit Logs (FR-16)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{mgmt_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/management/audit-logs?limit=25",
+              "host": ["{{base_url}}"],
+              "path": ["management", "audit-logs"],
+              "query": [
+                { "key": "limit", "value": "25" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Excel Export",
+      "item": [
+        {
+          "name": "Download Batch Excel Report",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{mgmt_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/export/excel?period_id=3",
+              "host": ["{{base_url}}"],
+              "path": ["export", "excel"],
+              "query": [
+                { "key": "period_id", "value": "3" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. RBAC Security Tests",
+      "item": [
+        {
+          "name": "Student Forbidden from Management Dashboard (Expect 403)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{student_token}}" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/management/overview",
+              "host": ["{{base_url}}"],
+              "path": ["management", "overview"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

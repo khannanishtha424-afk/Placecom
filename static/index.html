@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HSB Student Development Program (SDP) — Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/css/custom.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col justify-between">
+  <!-- Top Header -->
+  <header class="bg-blue-900 text-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-lg bg-blue-800 border border-blue-700 flex items-center justify-center font-bold text-xl text-amber-400">
+          HSB
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight">Hyderabad School of Business</h1>
+          <p class="text-xs text-blue-200">Student Development Program (SDP) · MBA Batch 2026–28</p>
+        </div>
+      </div>
+      <div class="text-xs text-blue-200 hidden sm:block">
+        Placement Committee Review Portal
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow flex items-center justify-center px-4 py-12">
+    <div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+      
+      <!-- Left Hero Column -->
+      <div class="md:col-span-7 space-y-6">
+        <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
+          <i class="fa-solid fa-graduation-cap mr-2"></i> Placement Preparation & Career Readiness
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          Comprehensive Tracking for Professional Excellence
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+          The HSB Student Development Program (SDP) tracks professional visibility, industry projects, competitive aptitude, leadership activities, certifications, and high-impact networking across weekly and monthly review cycles.
+        </p>
+
+        <!-- 6 Attributes Badges -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+          <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3">
+            <i class="fa-brands fa-linkedin text-blue-600 text-lg"></i>
+            <span class="text-xs font-medium text-slate-800">LinkedIn Presence</span>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3">
+            <i class="fa-solid fa-laptop-code text-indigo-600 text-lg"></i>
+            <span class="text-xs font-medium text-slate-800">Live Projects</span>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3">
+            <i class="fa-solid fa-trophy text-amber-500 text-lg"></i>
+            <span class="text-xs font-medium text-slate-800">Competitions</span>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3">
+            <i class="fa-solid fa-users text-emerald-600 text-lg"></i>
+            <span class="text-xs font-medium text-slate-800">Campus Activities</span>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3">
+            <i class="fa-solid fa-certificate text-purple-600 text-lg"></i>
+            <span class="text-xs font-medium text-slate-800">Certifications</span>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm flex items-center space-x-3">
+            <i class="fa-solid fa-handshake text-teal-600 text-lg"></i>
+            <span class="text-xs font-medium text-slate-800">Networking Logs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Login Card -->
+      <div class="md:col-span-5 bg-white p-8 rounded-2xl shadow-xl border border-slate-200">
+        <div class="text-center mb-6">
+          <h3 class="text-xl font-bold text-slate-900">Sign in to SDP Portal</h3>
+          <p class="text-xs text-slate-500 mt-1">Select your account or use institutional credentials</p>
+        </div>
+
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Institutional Email</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-envelope text-sm"></i>
+              </span>
+              <input type="email" id="emailInput" required placeholder="e.g. placement@hsb.edu"
+                class="w-full pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Password</label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                <i class="fa-solid fa-lock text-sm"></i>
+              </span>
+              <input type="password" id="passwordInput" required placeholder="••••••••"
+                class="w-full pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none">
+            </div>
+          </div>
+
+          <div id="loginError" class="hidden p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center space-x-2">
+            <i class="fa-solid fa-circle-exclamation flex-shrink-0"></i>
+            <span id="loginErrorMsg">Invalid credentials</span>
+          </div>
+
+          <button type="submit" id="submitBtn"
+            class="w-full py-2.5 px-4 bg-blue-900 hover:bg-blue-800 text-white font-medium text-sm rounded-lg transition duration-150 shadow-md flex items-center justify-center space-x-2">
+            <span>Sign In</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+        </form>
+
+        <!-- Quick 1-Click Demo Accounts -->
+        <div class="mt-6 pt-5 border-t border-slate-100">
+          <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider text-center mb-3">
+            Quick 1-Click Access
+          </p>
+          <div class="grid grid-cols-1 gap-2">
+            <button onclick="fillLogin('placement@hsb.edu', 'Admin@HSB2026')"
+              class="w-full py-2 px-3 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-lg text-left text-xs flex items-center justify-between text-slate-800 transition">
+              <span class="font-medium"><i class="fa-solid fa-user-shield text-blue-700 mr-1.5"></i> Management (Placement Committee)</span>
+              <span class="text-slate-400 text-[10px]">Batch Overview</span>
+            </button>
+            <button onclick="fillLogin('student01@hsb.edu', 'Student@HSB2026')"
+              class="w-full py-2 px-3 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg text-left text-xs flex items-center justify-between text-emerald-900 transition">
+              <span class="font-medium"><i class="fa-solid fa-user-graduate text-emerald-700 mr-1.5"></i> Student 1 (Fully Compliant)</span>
+              <span class="text-emerald-600 text-[10px]">All 6 Green</span>
+            </button>
+            <button onclick="fillLogin('student02@hsb.edu', 'Student@HSB2026')"
+              class="w-full py-2 px-3 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-lg text-left text-xs flex items-center justify-between text-amber-900 transition">
+              <span class="font-medium"><i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1.5"></i> Student 2 (Partial Compliance)</span>
+              <span class="text-amber-600 text-[10px]">End Date Missing</span>
+            </button>
+            <button onclick="fillLogin('student03@hsb.edu', 'Student@HSB2026')"
+              class="w-full py-2 px-3 bg-red-50 hover:bg-red-100 border border-red-200 rounded-lg text-left text-xs flex items-center justify-between text-red-900 transition">
+              <span class="font-medium"><i class="fa-solid fa-clock-rotate-left text-red-600 mr-1.5"></i> Student 3 (Overdue Review)</span>
+              <span class="text-red-600 text-[10px]">Follow-Up Required</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
+    <p>HSB Student Development Program (SDP) · Placement Committee · Cohort Size: 38 Students</p>
+  </footer>
+
+  <script src="/static/js/api.js"></script>
+  <script>
+    // Check if user is already logged in
+    const existingToken = API.getToken();
+    const existingUser = API.getUser();
+    if (existingToken && existingUser) {
+      if (existingUser.role === 'management' || existingUser.role === 'admin') {
+        window.location.href = '/management';
+      } else {
+        window.location.href = '/student';
+      }
+    }
+
+    function fillLogin(email, password) {
+      document.getElementById('emailInput').value = email;
+      document.getElementById('passwordInput').value = password;
+      document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('emailInput').value.trim();
+      const password = document.getElementById('passwordInput').value;
+      const errorDiv = document.getElementById('loginError');
+      const errorMsg = document.getElementById('loginErrorMsg');
+      const submitBtn = document.getElementById('submitBtn');
+
+      errorDiv.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Signing in...</span>';
+
+      try {
+        const data = await API.login(email, password);
+        if (data.role === 'management' || data.role === 'admin') {
+          window.location.href = '/management';
+        } else {
+          window.location.href = '/student';
+        }
+      } catch (err) {
+        errorMsg.textContent = err.message || 'Login failed. Please verify email and password.';
+        errorDiv.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Sign In</span><i class="fa-solid fa-arrow-right text-xs"></i>';
+      }
+    });
+  </script>
+</body>
+</html>

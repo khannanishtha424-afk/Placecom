@@ -1,0 +1,439 @@
+Business Rules Document — Batch 2026–28
+Owner: Placement Committee · Batch size: 38 students · Review cycle: Weekly and monthly
+1. Purpose
+The Student Development Program (SDP) aims to build students' professional visibility, practical experience, competitive aptitude, campus involvement, job-relevant skills and professional networks.
+This document defines the rules for recording activities, tracking deadlines, calculating compliance and identifying students who require follow-up.
+2. Business rules for the six attributes
+BR-01: LinkedIn presence
+Measurement frequency: Monthly
+Minimum requirement: 2 published posts per calendar month.
+Monthly posts
+Status
+0
+Red
+1
+Yellow
+2 or more
+Green
+Only published posts count; drafts, comments and connection requests do not qualify.
+Record the publication date and post URL.
+Reset the monthly count on the first day of each calendar month.
+Before the month ends, the status is provisional. Zero posts by mid-month must not be treated as a final monthly failure.
+BR-02: Projects
+Measurement frequency: Weekly
+Projects follow the start date, end date and initiation rule defined below.
+Project condition
+Status
+Initiated with a recorded start date and planned end date, and the project is within its timeline
+Green
+Completed on or before the planned end date
+Green
+Initiated, but no end date is recorded
+Yellow
+Not initiated for 2 consecutive weekly reviews
+Red
+Not completed after the recorded end date
+Red
+Additional rules:
+Every project must have a name, objective, start date, planned end date, current status and supporting evidence.
+A project is considered initiated when actual work has begun and an initial progress update is recorded.
+A project with a future start date is scheduled, not overdue for initiation.
+If a project is initiated without an end date, it remains yellow until a valid end date is recorded.
+If the planned end date passes without completion, the status becomes red and remains red until completion is verified or an authorized revision is approved.
+Any revised deadline must retain the original deadline in the history to prevent retrospective changes from hiding delays.
+BR-03: Competitions
+Measurement frequency: Weekly
+The focus is on participation tracking and timely updates, not on winning competitions.
+Competition condition
+Status
+Current record is complete and participation status is up to date
+Green
+Record exists, but required details or next steps are missing
+Yellow
+Required weekly update is missing
+Red
+Additional rules:
+Record competition name, organizer, registration date or status, deadline, submission status and result where available.
+Registration, submission, shortlisting and winning must be tracked as separate stages.
+A student is not penalized merely because no suitable competition is available in a given week, provided their status update is complete.
+A missed competition deadline should be flagged separately from the general reporting status.
+BR-04: Activities
+Measurement frequency: Weekly
+Activities include club and committee work, volunteering, campus events, leadership responsibilities and other approved developmental activities.
+Activity condition
+Status
+Initiated with a recorded start date and planned end date, and still within its timeline
+Green
+Completed on or before the planned end date
+Green
+Initiated, but no end date is recorded
+Yellow
+Not initiated for 2 consecutive weekly reviews
+Red
+Not completed after the recorded end date
+Red
+Additional rules:
+Record activity name, role, start date, planned end date, contribution, current status and evidence.
+Initiation requires actual participation or work, not merely expressing interest.
+Activities with no end date remain yellow until the end date is recorded.
+Activities overdue after their planned end date become red until completion is verified or an authorized deadline revision is approved.
+Attendance alone does not automatically qualify as a meaningful contribution.
+An ongoing activity may remain green across multiple weeks if its planned end date has not passed and the record remains valid.
+BR-05: Certifications
+Measurement frequency: Monthly, with deadline tracking
+Each certification must follow the same start-date and end-date rules as projects and activities.
+Certification condition
+Status
+Started with a recorded start date and planned end date, and still within its timeline
+Green
+Successfully completed on or before the planned end date, with evidence
+Green
+Started, but no end date is recorded
+Yellow
+Not initiated for 2 consecutive weekly reviews
+Red
+Not completed after the recorded end date
+Red
+Additional rules:
+Record certification name, provider, start date, planned end date, completion date, status and certificate link.
+Enrollment alone does not count as initiation; actual learning activity must be recorded.
+A completed certification requires verifiable completion evidence.
+A certification that exceeds its planned end date becomes red until completion is verified or an authorized deadline revision is approved.
+The monthly target remains at least one completed certification per calendar month, if this target is formally adopted by the Placement Committee. Being green on an in-progress certification does not by itself satisfy that monthly completion target.
+3. Common date and initiation rules
+These rules apply specifically to projects, activities and certifications.
+Rule ID
+Business rule
+BR-06
+Every record must have a unique ID, student ID and attribute type.
+BR-07
+A planned start date and planned end date must be recorded for an activity to qualify as having a complete timeline.
+BR-08
+If the activity has started but no end date is recorded, its status is yellow.
+BR-09
+If an activity has not been initiated for two consecutive weekly reviews, its status becomes red.
+BR-10
+A project, activity or certification that is incomplete after its planned end date becomes red.
+BR-11
+Completion must be supported by appropriate evidence before it is accepted.
+BR-12
+An authorized deadline revision must preserve the original deadline, revised deadline, reason and approver.
+BR-13
+A revised deadline must not automatically erase an existing overdue record or its history.
+BR-14
+Start dates, planned end dates, actual completion dates and status-change dates must be stored separately.
+BR-15
+Weekly reviews follow a consistent Monday–Sunday cycle.
+Important interpretation of the two-week rule: the system should flag a record as red only after it has been assessed as not initiated in two consecutive weekly reviews. A future scheduled start date should not be treated as a failure before its initiation deadline.
+4. BR-16: Networking
+Measurement frequency: Weekly
+Minimum requirement: 2 meaningful professional conversations per week.
+Conversations in the week
+Status
+0
+Red
+1
+Yellow
+2 or more
+Green
+Record the person's name, role, organization, date and key learning.
+Alumni, recruiters, industry professionals, faculty and relevant peers may qualify.
+A connection request, follow or simple greeting does not qualify by itself.
+Count each distinct conversation once.
+Evaluate the target at the end of each weekly review period.
+5. Reporting and dashboard rules
+The Excel tracker must provide:
+Student-wise status: Red, yellow and green status for all six attributes.
+Weekly batch overview: Number and percentage of students meeting each weekly requirement.
+Monthly batch overview: LinkedIn posts and certification completion against monthly targets.
+Overdue register: Student name, attribute, planned end date, days overdue and corrective action.
+Initiation register: Activities not initiated across consecutive weekly reviews.
+Timeline tracking: Start date, planned end date, actual completion date and deadline revisions.
+Evidence register: Links to posts, project records, activity proof, certificates and networking logs.
+Follow-up list: Student, unmet requirement, responsible reviewer, action and next review date.
+Historical reporting: Previous weekly and monthly statuses must remain available for trend analysis.
+The dashboard must distinguish a missing report from a verified lack of progress. A missing report can trigger red for reporting compliance, but the underlying activity status should remain identifiable as unverified until reviewed.
+6. Overall student compliance
+Overall compliance should be assessed against the requirements applicable to the selected review period.
+\[ \text{Compliance \%} = \frac{\text{Students meeting all applicable requirements}} {\text{Students assessed}} \times 100 \]
+A student is fully compliant only when all applicable requirements for the selected period are met.
+Monthly requirements should not be treated as final failures before the month-end deadline.
+Approved exemptions must be documented and handled consistently.
+Red statuses should trigger a follow-up action; they should not automatically result in a penalty unless a separate policy has been approved.
+7. Implementation decision
+There is one important distinction to preserve in the Excel formulas: green for an ongoing, properly scheduled project is not the same as green for a completed project or a monthly certification target.
+The tracker should therefore maintain two separate fields:
+Timeline status: Green, yellow or red based on initiation, dates and completion.
+Target achievement: Met, in progress or not met based on the required output, such as completing one certification during the month.
+This prevents an in-progress certification from being counted as a completed monthly certification, while still allowing the student to receive green for following a valid timeline.
+HSB Student Development Program — UI Business Rules & Functional Requirements
+The system should have two separate interfaces built on a shared database: a Student Portal for submitting and tracking development activities, and a Management Dashboard for monitoring all 38 students, reviewing evidence, and identifying gaps.
+One important design rule: the interface should distinguish weekly target achievement from activity timeline compliance. A student may have a project progressing on schedule but still miss a separate weekly target. The system must track both without incorrectly marking the student fully compliant.
+1. Application structure
+Student Portal
+Submit updates · Track personal targets · Manage activity timelines · Upload evidence
+Student access
+Management Dashboard
+Batch overview · Student-level drill-down · Compliance monitoring · Follow-ups
+Authorized access
+Both interfaces must use the same underlying student records. Students can update their own information, while authorized management users can review records and monitor batch performance.
+2. Student Portal — UI rules
+BR-UI-01: Landing page — Week selection
+When a student logs in, the first screen must display the weeks of the current month, including the month and year.
+My Development Program
+October 2026
+Student view
+Week 1
+Oct 1–4
+Completed
+Week 2
+Oct 5–11
+Partial
+Week 3
+Oct 12–18
+In progress
+Week 4
+Oct 19–25
+Upcoming
+Week 5
+Oct 26–31
+Short final week of the month
+Illustrative layout. Week ranges and statuses must be generated from actual dates and saved records.
+Business rules:
+Every week card must display the week number, date range, month and year.
+Weeks must follow a Monday–Sunday review cycle, with the first and last weeks adjusted to the calendar month.
+The system must handle short weeks and months with five calendar-week segments.
+The current week must be clearly identified.
+Selecting a week opens its six attributes.
+Previous weeks display their saved records and status.
+Future weeks are read-only until the applicable week begins.
+Students must not be allowed to change the reporting period to bypass an overdue task or erase previous submissions.
+BR-UI-02: Attribute selection screen
+After selecting a week, students must see all six attributes as clickable cards.
+Week 3 — October 2026
+12–18 October
+In progress
+LinkedIn Posts
+Monthly target: 2 posts
+1 / 2 posts
+Projects
+Timeline and progress
+On schedule
+Competitions
+Participation updates
+Updated
+Activities
+Activity timelines
+End date missing
+Certifications
+Monthly completion target
+Not started
+Networking
+Weekly target: 2 conversations
+2 / 2 conversations
+Illustrative data only. Actual cards must calculate statuses from the student's saved records.
+Each card must show:
+Attribute name and applicable target.
+Current status.
+Progress against the target, where numerical measurement applies.
+A short reason when the status is yellow or red.
+A clickable action to add, edit or view records.
+The overall week status must be calculated automatically and must not be manually selected by the student.
+BR-UI-03: Attribute detail and data entry
+Clicking an attribute opens a dedicated entry screen. Each attribute must have its own fields and validation rules.
+Example: Add a project
+The same form structure applies to activities and certifications, with attribute-specific fields.
+Project name
+Start date12/10/26
+Planned end date30/10/26
+Current status
+Not started
+In progress
+Completed
+Blocked
+Evidence link or progress notes
+Validate example entry
+This is an interactive form mock-up for demonstrating validation; it does not save to a live student database.
+Required fields and validation:
+Projects: Project name, objective, start date, planned end date, status, progress update and evidence where applicable.
+Competitions: Competition name, organizer, registration status, deadline, stage and result when available.
+Activities: Activity name, role, start date, planned end date, contribution and evidence.
+Certifications: Certification name, provider, start date, planned end date, completion date and certificate evidence upon completion.
+LinkedIn: Post URL and publication date.
+Networking: Contact name, professional role, organization, conversation date and key learning.
+For projects, activities and certifications, the end date may initially be blank, but the record must then be yellow if initiated. The interface should visibly explain that an end date is required to establish a complete timeline.
+The application must validate that end dates do not precede start dates and that completion dates are consistent with the recorded timeline. A completed item requires evidence before it can be accepted as completed.
+BR-UI-04: Saving, editing and submission
+Students may save drafts and return to them later.
+A saved record must retain its creation date, last-updated date and status history.
+Students may edit their own records, subject to the period's submission rules.
+Changes to dates after a task becomes overdue must be logged and must not silently remove the original deadline.
+A student must not edit another student's records.
+Management corrections must record the reviewer, date and reason.
+Once a weekly period closes, student editing should be restricted to an approved correction workflow.
+Evidence links must be validated for format, and uploaded files must be stored securely if file upload is supported.
+3. Management Dashboard — UI rules
+The management interface should open on a batch-wide overview, not an individual student profile.
+BR-UI-05: Batch summary
+SDP Management Dashboard
+HSB · Batch 2026–28 · 38 students
+Management
+Reporting periodWeek 3 · 12–18 Oct 2026
+Fully compliant
+24
+All applicable targets met
+Partially compliant
+9
+Some targets met
+No targets met
+5
+No applicable targets met
+Students assessed
+38
+Illustrative batch size
+Illustrative figures only. Production figures must be calculated from actual records and must reconcile to the number of students assessed.
+The dashboard must show:
+Number of students fully compliant.
+Number partially compliant.
+Number who met none of the applicable targets.
+Number of students assessed and number with missing or unverified data.
+Overall compliance percentage.
+Attribute-wise red, yellow and green distribution.
+Overdue activities and certifications.
+Students with no update for two consecutive weekly reviews.
+Recent submissions and records awaiting review.
+The reporting period must be selectable by week, month and year. Changing the reporting period must refresh all metrics, names and detailed records.
+BR-UI-06: Batch compliance classification
+For the selected reporting period, each student must be classified using the following rules:
+Student classification
+Business rule
+Fully compliant
+All applicable targets and required reporting rules are met.
+Partially compliant
+At least one applicable target is met, but at least one other target is not met or remains incomplete.
+No targets met
+None of the applicable targets has been met.
+Awaiting assessment
+Insufficient data exists to determine compliance reliably.
+The dashboard must not classify a student as fully compliant just because they submitted all forms. Actual target achievement and timeline compliance must also be considered.
+Important: A yellow timeline status does not automatically mean that a student's weekly output target has been missed. The system must calculate the two dimensions separately and then apply the overall classification rules.
+Monthly targets, such as LinkedIn posts and completed certifications, must be evaluated using the selected month's progress. Before the month closes, the dashboard should identify these as provisional rather than final failures.
+BR-UI-07: Student names for partial and non-compliance
+The dashboard must provide clickable lists of students who are partially compliant or have met none of their applicable targets.
+Students requiring follow-up
+Student A
+LinkedIn: 1 of 2 posts · Activities: missing end date
+Partial
+Student B
+Networking: 0 conversations · Project overdue
+None met
+Illustrative names and cases. Real records must use the actual student names and evidence-based reasons.
+Each row must show:
+Student name and student ID.
+Overall classification.
+Attribute or attributes causing non-compliance.
+Exact reason for each red or yellow status.
+Missed target or overdue deadline.
+Required corrective action.
+Assigned reviewer and next follow-up date.
+Clicking a student must open their detailed progress profile. Management must be able to filter this list by attribute, status, mentor, week and month.
+BR-UI-08: Detailed student progress
+Each student's profile must include a summary of all six attributes, historical progress, supporting evidence and task timelines.
+Student progress profile
+Illustrative student record
+Weekly compliance
+4 / 6
+Overdue items
+1
+Project timeline
+EARLY BIRD project
+Overdue
+Start: 12 Oct 2026 · Planned end: 14 Oct 2026
+Illustrative timeline. Actual completion and progress must come from verified records.
+Management must be able to inspect:
+All six attribute statuses for the selected period.
+The count of LinkedIn posts and networking conversations.
+Every project, competition, activity and certification record.
+Start date, planned end date, actual completion date and any revised deadline.
+Status history and date of each status change.
+Evidence links and review comments.
+Weekly and monthly target achievement.
+Follow-up actions and their resolution status.
+The detailed view must support a chronological history so that management can identify whether a student is improving, stagnating or repeatedly missing requirements.
+BR-UI-09: Attribute timeline visualization
+Projects, activities and certifications must have a timeline view, preferably a Gantt-style visualization.
+Each timeline item must show:
+Activity name.
+Planned start and end dates.
+Actual completion date, when completed.
+Current timeline status.
+Overdue duration, if applicable.
+Original and revised deadlines.
+Evidence and reviewer comments.
+Color rules:
+Green: Valid timeline and within schedule, or completed on time.
+Yellow: Initiated but missing a planned end date.
+Red: Not initiated for two consecutive weekly reviews, or incomplete after the planned end date.
+The interface must never show an item as completed solely because its end date has passed.
+BR-UI-10: Attribute-wise batch analysis
+Management must be able to select any attribute and see how the batch is performing.
+For example, selecting LinkedIn should display each student's monthly post count, URLs and status. Selecting certifications should display each certification's start date, deadline, completion evidence and monthly completion status.
+The attribute analysis page must include:
+Number of students compliant with the attribute.
+Number partially compliant or non-compliant.
+Student names for each status.
+Individual activity records and timelines.
+Historical trends by week or month.
+Exportable filtered records.
+BR-UI-11: Review, follow-up and corrections
+Management users must be able to:
+Review student-submitted records and evidence.
+Request corrections or clarification.
+Approve justified deadline changes.
+Record follow-up notes and next review dates.
+Track whether corrective actions have been resolved.
+View the original and revised values in the audit history.
+Only authorized management users may change a verified record's status directly. Every manual override must include a reason, reviewer identity and timestamp.
+BR-UI-12: Search, filters and exports
+The management dashboard must support:
+Search by student name or student ID.
+Filter by week, month, year, attribute, mentor and compliance status.
+Sort students by overdue duration, missing updates and overall status.
+Export the current filtered results to Excel.
+Generate an individual student report and a batch summary.
+Preserve historical data for comparisons across review periods.
+4. Shared system rules
+The following rules apply to both interfaces:
+Every student has one unique record and can access only their own portal.
+Management users receive role-based permissions.
+All six attributes must use the agreed business rules for status calculations.
+Weekly and monthly reporting periods must be consistent throughout the system.
+Dates and deadline changes must be stored in the database, not only displayed in the UI.
+Historical submissions must be retained so that earlier reports remain accurate.
+Missing information must be identifiable separately from verified non-compliance.
+The interface must provide clear validation messages when required fields or evidence are missing.
+All dashboard totals must be calculated from the same underlying records to avoid inconsistencies between pages.
+The system must work on desktop and mobile screens.
+5. Recommended navigation
+Login and role verification
+Student Portal
+Select week → Select attribute → Submit details → Track status
+Management Portal
+Batch summary → Compliance lists → Student profile → Follow-up
+Shared database and business-rule engine
+Student records · Attribute records · Deadlines · Evidence · Status history · Audit logs
+6. Acceptance criteria
+The UI is ready for use when the following tests pass:
+A student can select a week, open each of the six attributes and submit a valid update.
+A project initiated without an end date becomes yellow.
+A project past its end date without verified completion becomes red.
+A project not initiated for two consecutive weekly reviews becomes red, without incorrectly penalizing a future scheduled start.
+A student with one LinkedIn post in a completed month is yellow; two or more is green.
+A student with one qualifying networking conversation in a completed week is yellow; two or more is green.
+An in-progress certification can be green on its timeline while remaining incomplete against the monthly certification target.
+The management dashboard accurately identifies fully compliant, partially compliant and zero-target-achievement students.
+Every partial or non-compliant student can be traced to specific unmet requirements.
+Management can view each attribute's timeline, evidence and status history.
+Changing a deadline does not erase the original deadline or audit trail.
+The total number of students in all classifications reconciles with the number assessed, while awaiting-assessment students are reported separately.
+Final design principle: the Student Portal should make updating progress simple and transparent; the Management Dashboard should make exceptions, overdue tasks and batch-wide gaps immediately visible. The same business rules must govern both interfaces, so the student and management views never disagree about a record's status.

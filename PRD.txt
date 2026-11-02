@@ -1,0 +1,292 @@
+PRODUCT REQUIREMENTS DOCUMENT
+HSB Student Development Program
+SDP Tracking Portal & Management Dashboard
+Document field
+Details
+Document version
+1.0 — Draft for implementation
+Product owner
+Placement Committee, HSB
+Target cohort
+MBA Batch 2026–28
+Initial cohort size
+38 students (configurable)
+Review cadence
+Weekly and monthly
+Primary audience
+Students, Placement Committee and authorized reviewers
+Technology stack
+HTML, Tailwind CSS and JavaScript; Python + FastAPI; SQLite; Postman for API testing
+Purpose: turn the agreed SDP business rules and UI requirements into a buildable, testable product specification.
+1. Executive Summary
+The HSB Student Development Program (SDP) application will help students record and manage professional-development activities while allowing the Placement Committee to monitor progress across the cohort. The application will provide two role-based interfaces backed by one database and one shared status-calculation engine.
+Student Portal: choose a reporting week, open one of six attributes, submit progress and evidence, and review current and historical status.
+Management Dashboard: review batch-level compliance, identify students requiring follow-up, inspect individual records and timelines, review evidence, approve justified corrections, and export reports.
+Core design principle: timeline health and target achievement are separate dimensions. A project can be on schedule while a separate target remains unmet.
+All status values and dashboard totals must be calculated from saved records and agreed rules; illustrative sample values must never appear as production metrics.
+2. Problem Statement
+Student development information is difficult to monitor consistently when updates, deadlines, evidence and follow-ups are maintained separately. The Placement Committee needs a reliable way to see who is progressing, which requirements are incomplete, whether timelines are overdue, and what action is needed. Students need a clear, low-friction process for maintaining accurate records without losing prior submissions.
+3. Product Goals and Success Measures
+Goal
+Product outcome / measure
+One source of truth
+Student submissions, evidence, deadlines, status history and management decisions are stored in the shared database.
+Transparent student progress
+A student can view all six attributes and the reason for each red/yellow status.
+Actionable batch oversight
+Management can identify partial/non-compliance, overdue items, missing updates and follow-up owners.
+Consistent status calculations
+Student and management views use the same backend business rules and produce matching statuses.
+Historical accountability
+Closed-period records and original deadlines remain available for review and trend analysis.
+Accessible use
+Core flows work on desktop and mobile screens.
+4. Users and Permissions
+Role
+Needs
+Permissions
+Student
+Record progress, attach evidence, understand targets and correct own records.
+View and manage own records only; save drafts; submit updates; view personal history. Closed-period changes require an approved correction workflow.
+Management / Placement Committee
+Monitor cohort performance, review records, investigate gaps and coordinate follow-up.
+View cohort data; search/filter/export; review evidence; request corrections; assign follow-ups; approve deadline changes; make authorized overrides with reason and audit trail.
+System administrator (if implemented)
+Maintain accounts and configuration.
+Manage users, role assignments and approved program settings. Do not grant unrestricted access by default.
+5. Scope
+5.1 In scope for the first release
+Role-based login and access control for students and authorized management users.
+Student directory and unique student identifiers for the initial 38-student cohort.
+Six attribute records: LinkedIn Posts, Projects, Competitions, Activities, Certifications and Networking.
+Weekly and monthly reporting periods, including partial first/last weeks of a month.
+Attribute-specific forms, input validation, evidence links and progress notes.
+Automatic timeline status, target-achievement status and overall student classification.
+Batch dashboard, student profile, attribute-wise analysis, timeline view, follow-up tracking and audit history.
+Search, filters, Excel export and individual/batch reports.
+Responsive UI, API validation, test coverage and setup documentation.
+5.2 Out of scope unless separately approved
+Automated scraping or verification of LinkedIn, learning platforms or competition portals.
+Automatic file storage/cloud uploads; the first release may use validated evidence URLs if secure upload storage is not configured.
+Automatic penalties, grading, ranking or disciplinary action based only on red status.
+Email/SMS/WhatsApp notifications and calendar integrations.
+Integrations with HSB student-information systems or external identity providers.
+6. SDP Attributes and Requirements
+Attribute
+Frequency / target
+Required data
+Status / business logic
+LinkedIn Posts
+Monthly: at least 2 published posts per calendar month.
+Post URL, publication date; optional note.
+0 = Red; 1 = Yellow; 2+ = Green. Drafts, comments and connection requests do not count. Month-end outcome is provisional until month closes.
+Projects
+Weekly timeline review.
+Name, objective, start date, planned end date, current status, progress update and evidence where applicable.
+Green when initiated with a valid timeline and within schedule, or verified completed on time. Yellow if initiated but end date missing. Red if not initiated for 2 consecutive weekly reviews or incomplete after planned end date.
+Competitions
+Weekly update.
+Competition name, organizer, registration status/date, deadline, submission status/stage, result when available, next step.
+Green when details and participation status are up to date; Yellow when details/next steps are incomplete; Red when the required weekly update is missing. Track missed deadline separately. No suitable competition is not failure if the update is complete.
+Activities
+Weekly timeline and contribution review.
+Name, role, start date, planned end date, contribution, current status and evidence.
+Same timeline rules as projects. Attendance alone is not a meaningful contribution. Actual participation/work is required to count as initiated.
+Certifications
+Monthly target plus timeline tracking.
+Name, provider, start date, planned end date, completion date, status and certificate evidence.
+Timeline status follows project/activity rules. Enrollment alone is not initiation. Completion requires evidence. Monthly target is at least 1 completed certification only if formally adopted by the Placement Committee.
+Networking
+Weekly: at least 2 meaningful professional conversations.
+Contact name, role, organization, conversation date and key learning.
+0 = Red; 1 = Yellow; 2+ = Green. A connection request, follow/following, or simple greeting does not qualify. Count distinct conversations once.
+7. Core Business Rules
+7.1 Reporting calendar
+Weekly review periods follow Monday–Sunday. The first and last periods displayed within a month may be partial calendar weeks.
+Each week card displays week number, date range, month and year. The current week is highlighted; future weeks are read-only until they begin.
+Historical periods display saved records and status. Students cannot switch periods to erase or bypass overdue submissions.
+Monthly targets are evaluated against the selected calendar month and remain provisional until that month closes.
+7.2 Timeline and initiation rules
+Every record has a unique ID, student ID, attribute type, created timestamp and last-updated timestamp.
+For projects, activities and certifications, planned start date, planned end date, actual completion date and status-change date are stored separately.
+A future scheduled start is not a failure. Red for non-initiation applies only after two consecutive weekly reviews assess the item as not initiated and the scheduled start is no longer in the future.
+An item that has started but has no planned end date is Yellow until a valid end date is recorded.
+An incomplete item becomes Red after its planned end date. Passing the end date must never auto-mark an item complete.
+A completion claim requires appropriate evidence before it can be accepted.
+A deadline revision requires authorized approval, a reason, approver identity and timestamp. The original deadline and prior status history remain visible.
+A red status should trigger a follow-up workflow, not an automatic penalty.
+7.3 Separate status dimensions
+The system must store and calculate (a) timeline status, (b) target achievement and (c) overall student classification separately. For example, an in-progress certification can be Green on its timeline but still not satisfy the monthly completed-certification target.
+Dimension
+Meaning
+Timeline status
+Green / Yellow / Red based on initiation, dates, completion and evidence.
+Target achievement
+Met / In progress / Not met, based on output targets such as post or conversation counts and any adopted monthly certification target.
+Overall classification
+Fully compliant / Partially compliant / No targets met / Awaiting assessment for the selected reporting period.
+7.4 Overall classification
+Classification
+Rule
+Fully compliant
+All applicable targets and required reporting rules are met.
+Partially compliant
+At least one applicable target is met, but at least one other target is not met or remains incomplete.
+No targets met
+None of the applicable targets has been met.
+Awaiting assessment
+There is insufficient data to determine compliance reliably. This must remain separate from verified non-compliance.
+Monthly target outcomes must be marked provisional before month-end. Approved exemptions must be recorded and applied consistently. Dashboard totals must reconcile: assessed classifications must sum to the assessed population, while Awaiting Assessment is reported separately.
+8. Functional Requirements
+FR-01 — Authentication and role verification: The application must identify the signed-in user and enforce Student or Management permissions on both UI routes and API endpoints.
+FR-02 — Student landing page: Display reporting weeks for the current month, with week number, date range, month/year and current/upcoming/completed state.
+FR-03 — Six attribute cards: After a student selects a week, show all six attributes with applicable target, current status, progress count where relevant, short status reason and an action to add/view records.
+FR-04 — Attribute-specific entry forms: Provide separate forms and field validation for LinkedIn, Projects, Competitions, Activities, Certifications and Networking.
+FR-05 — Draft and save: Allow students to save drafts and return later. Save creation/update timestamps and maintain a history of submitted changes.
+FR-06 — Evidence and completion validation: Validate evidence URL format; require completion evidence before accepting completed project/activity/certification records. If uploads are supported, store files securely.
+FR-07 — Student history: Allow students to review previous periods, submissions, status explanations and correction requests.
+FR-08 — Management overview: Show batch totals for fully compliant, partially compliant, no targets met, assessed and awaiting assessment; show compliance percentage and attribute-wise status distribution.
+FR-09 — Follow-up lists: Provide clickable lists for partial/non-compliance and overdue/missing updates. Each row includes student, ID, classification, unmet attribute, reason, deadline/target, corrective action, reviewer and next follow-up date where assigned.
+FR-10 — Student detail profile: Show all six attribute statuses, records, evidence, weekly/monthly target achievement, timelines, historical status changes, reviewer comments and follow-up resolution.
+FR-11 — Timeline visualization: Provide a timeline/Gantt-style view for projects, activities and certifications, including planned start/end, actual completion, overdue duration and original/revised deadlines.
+FR-12 — Attribute-wise batch analysis: For a selected attribute, show counts by status, student names, underlying records, evidence, historical trends and exportable results.
+FR-13 — Review and correction workflow: Management can request clarification/correction, record reviewer comments, approve justified deadline changes and assign follow-up actions. Manual status overrides require reason, reviewer and timestamp.
+FR-14 — Search, filters and sorting: Search by student name/ID; filter by week, month, year, attribute, mentor and classification/status; sort by overdue duration, missing updates and overall status.
+FR-15 — Exports: Export the current filtered results to Excel and generate individual student reports and batch summaries.
+FR-16 — Audit trail: Preserve prior values for deadline changes, manual overrides, reviewer decisions and corrections. Record actor, timestamp, reason and before/after values.
+FR-17 — Responsive layout: Core student and management workflows must be usable on desktop and mobile.
+FR-18 — Shared calculation engine: All views and reports must call the same backend rules so displayed statuses and totals cannot disagree.
+9. Key User Journeys
+9.1 Student update journey
+Student logs in and lands on the current month’s week selector.
+Student chooses an available week and sees six attribute cards.
+Student opens an attribute, adds or updates the relevant record, and supplies evidence/notes where required.
+The system validates fields, saves the record and recalculates status from the shared rules engine.
+Student sees saved progress, status explanation and any missing field/evidence requirement.
+After a period closes, changes go through the approved correction process rather than overwriting history.
+9.2 Management review journey
+Management logs in and sees the batch overview for the selected week/month/year.
+Management filters the batch by classification, attribute, mentor or missing/overdue status.
+Management opens a student profile to inspect records, evidence, timeline and history.
+Management requests a correction, records a follow-up, or approves a justified deadline revision.
+The system records the action in the audit trail and refreshes affected status calculations and reports.
+Management exports the filtered list or a batch/individual report when needed.
+10. Data Model — Minimum Entities
+Entity
+Core fields / purpose
+User
+user_id, login identifier, role, active flag, created_at; credentials must be stored securely if local authentication is used.
+Student
+student_id, name, cohort/batch, optional mentor_id, active status.
+ReportingPeriod
+period_id, period type, start_date, end_date, month, year, status (open/closed/provisional).
+AttributeRecord
+record_id, student_id, attribute_type, title/name, description/objective, status, created_at, updated_at, reporting-period association.
+Timeline
+record_id, planned_start_date, original_planned_end_date, current_planned_end_date, actual_completion_date, timeline_status.
+Evidence
+evidence_id, record_id, URL or secure file reference, evidence type, submitted_at, verification status, reviewer comment.
+TargetAchievement
+student_id, attribute_type, period_id, target value, actual value, target status, provisional/final flag.
+Review / Follow-up
+review_id, student_id/record_id, reviewer_id, comment, action required, owner, next_review_date, resolution status.
+DeadlineRevision
+revision_id, record_id, old_deadline, new_deadline, reason, approver_id, approved_at.
+AuditLog
+actor_id, action, entity type/id, before/after values, reason, timestamp.
+Implementation note: the exact schema can be normalized by the developer, but it must preserve unique IDs, referential integrity, reporting-period history, evidence references and auditability.
+11. Non-Functional Requirements
+Area
+Requirement
+Security
+Enforce role-based access on backend endpoints; students can only read/write their own records. Do not rely on hiding UI elements as the security boundary.
+Data integrity
+Validate dates and required fields server-side. Use database constraints and transactions for critical writes.
+Auditability
+Never silently overwrite original deadlines or closed-period records; retain actor and timestamp for management changes.
+Consistency
+Calculate statuses and dashboard aggregates server-side from one source of truth.
+Usability
+Use clear labels, plain-language reasons, consistent Red/Yellow/Green semantics and helpful validation messages.
+Responsiveness
+Support desktop and mobile viewport sizes.
+Performance
+For the initial 38-student cohort, dashboard filters and normal page loads should feel responsive; avoid unnecessary repeated database queries.
+Maintainability
+Keep status rules in a reusable backend service with tests, rather than duplicating logic across screens.
+Reliability
+Handle missing/invalid inputs gracefully and show errors without losing already saved records.
+Privacy
+Show each student only their own information. Limit management access to authorized users and avoid exposing evidence links unnecessarily.
+12. Acceptance Criteria / Definition of Done
+A student can select a valid reporting week and open all six attribute cards.
+A student cannot access another student's records by changing a URL, identifier or API request.
+LinkedIn status is Red for 0 posts, Yellow for 1 and Green for 2 or more in the selected month; an open month is provisional.
+Networking status is Red for 0 qualifying conversations, Yellow for 1 and Green for 2 or more in the selected completed week.
+An initiated project/activity/certification without a planned end date is Yellow.
+An incomplete timeline item past its current approved end date is Red and is not automatically marked completed.
+An item not initiated for two consecutive weekly reviews becomes Red only when the planned start is no longer in the future.
+A completed item without required evidence cannot be accepted as completed.
+An in-progress certification can have Green timeline status while remaining short of the monthly completion target.
+A complete competition update can be Green even when no suitable competition was available; missed competition deadlines are flagged separately.
+Changing a deadline retains original deadline, revised deadline, reason, approver and timestamp.
+The management dashboard supports all required filters, student drill-down, follow-up lists and Excel exports.
+Every red/yellow status displayed to management has an understandable reason linked to a record or missing requirement.
+Overall classifications reconcile with assessed counts; Awaiting Assessment is shown separately.
+Student and management views show matching statuses for the same student and period.
+Historical closed-period records remain available after later edits or deadline revisions.
+The application works on desktop and mobile and includes API tests, setup instructions and a Postman collection.
+13. Reporting and Metrics
+Batch summary by selected period: fully compliant, partially compliant, no targets met, awaiting assessment and assessed counts.
+Overall compliance percentage: students meeting all applicable requirements divided by students assessed, multiplied by 100. Awaiting-assessment records are excluded from the assessed denominator and shown separately.
+Attribute distribution: red/yellow/green counts and percentages by attribute.
+Monthly summary: LinkedIn post counts and certification completions against adopted targets.
+Overdue register: student, attribute, record, planned end date, days overdue, status and corrective action.
+Initiation register: records not initiated across consecutive weekly reviews.
+Follow-up register: student, unmet requirement, reviewer/owner, next review date and resolution status.
+Historical trends: comparison of weekly and monthly outcomes without rewriting past reports.
+14. Assumptions and Decisions to Confirm
+Item
+Current treatment / decision needed
+Certification monthly target
+The source rules say at least one completed certification per month if formally adopted by the Placement Committee. Make this configurable and do not enforce it as a final requirement until approved.
+Authentication method
+Role-based access is required; the specific authentication provider or local login design is not specified and must be selected during implementation.
+Evidence storage
+Evidence URLs are supported by the requirements. Secure file upload is optional and should only be implemented if storage and access controls are configured.
+Weekly submission cutoff
+Weekly periods are Monday–Sunday; exact cutoff time/time zone and the formal correction window after closure need confirmation.
+Competition update expectation
+The rules define weekly update status but do not specify whether a no-competition update must be explicitly submitted as a separate declaration; implement a clear “no suitable competition this week” option.
+Mentor assignments
+Dashboard filters include mentor; source roster and mentor assignments must be supplied/imported if this filter is needed.
+Manual status overrides
+Allowed only for authorized management users, with mandatory reason, reviewer identity, timestamp and audit history.
+Approved exemptions
+Must be recorded and visible; exact exemption approval policy is outside the supplied rules.
+15. Technology and Delivery Requirements
+Layer
+Requirement
+Frontend
+HTML + Tailwind CSS + JavaScript. Build functional responsive screens, not static mockups.
+Backend
+Python + FastAPI. Implement validation, authorization, shared status calculations and reporting APIs.
+Database
+SQLite for the initial release. Persist all records, deadlines, review periods, evidence references and audit logs.
+API testing
+Postman collection covering authentication/roles, CRUD flows, status rules, exports and forbidden cross-student access.
+Testing
+Unit tests for business-rule edge cases; integration tests for API/database behavior; end-to-end checks for core journeys.
+Documentation
+README with setup/run instructions, configuration, seed/import approach, test commands, known limitations and demo accounts if applicable.
+16. Suggested Implementation Sequence
+Inspect the project folder and existing PRD/business rules before coding; reuse existing structure and avoid duplicating specifications.
+Define schema, reporting-period handling, roles and the shared status-calculation service.
+Implement authentication/authorization and student record APIs.
+Build student week selector, attribute cards, forms, validation and personal history.
+Build management dashboard, filters, student profiles, timeline views and follow-up workflow.
+Add audit history, deadline revision workflow, Excel exports and reports.
+Add unit/integration tests, Postman collection, responsive QA and README.
+Validate acceptance criteria with representative edge cases, including provisional monthly targets and two-consecutive-week initiation logic.
+17. Design Principle
+The Student Portal should make progress reporting simple and transparent. The Management Dashboard should make exceptions, overdue work and batch-wide gaps immediately visible. Both interfaces must use the same saved data and business-rule engine.

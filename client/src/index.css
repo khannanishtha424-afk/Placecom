@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+:root {
+  /* Bioluminescent LMS Color Tokens */
+  --color-abyss-black: #03060B;
+  --color-trench-navy: #071426;
+  --color-midnight-teal: #0A2A33;
+  --color-biolume-cyan: #3FF2E6;
+  --color-aqua-glow: #5CC8FF;
+  --color-jellyfish-violet: #9B7BFF;
+  --color-plankton-green: #7CFFB2;
+  --color-coral-ember: #FF6B9A;
+  --color-pearl-white: #E8F6FA;
+  --color-mist-grey: #8FA7B3;
+
+  /* Typography */
+  --font-heading: 'Sora', 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Motion intensity factor */
+  --motion-scale: 1;
+}
+
+[data-motion="off"] {
+  --motion-scale: 0;
+  animation-duration: 0.001s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001s !important;
+}
+
+[data-motion="calm"] {
+  --motion-scale: 0.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-scale: 0.1;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-abyss-black);
+  color: var(--color-pearl-white);
+  overflow-x: hidden;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Glass Submersible Viewport Panels */
+.submersible-glass {
+  background: rgba(7, 20, 38, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(63, 242, 230, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(3, 6, 11, 0.6), inset 0 0 16px rgba(63, 242, 230, 0.04);
+}
+
+.submersible-glass-interactive {
+  background: rgba(7, 20, 38, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(63, 242, 230, 0.22);
+  box-shadow: 0 8px 32px 0 rgba(3, 6, 11, 0.6), inset 0 0 20px rgba(63, 242, 230, 0.06);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.submersible-glass-interactive:hover {
+  border-color: rgba(63, 242, 230, 0.55);
+  box-shadow: 0 12px 40px 0 rgba(63, 242, 230, 0.15), inset 0 0 25px rgba(63, 242, 230, 0.1);
+  transform: translateY(-2px);
+}
+
+.submersible-glass-violet {
+  background: rgba(15, 12, 38, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(155, 123, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(3, 6, 11, 0.6), inset 0 0 20px rgba(155, 123, 255, 0.08);
+}
+
+/* Glowing Neon Borders & Rings */
+.glow-cyan {
+  box-shadow: 0 0 15px rgba(63, 242, 230, 0.45);
+}
+
+.glow-violet {
+  box-shadow: 0 0 18px rgba(155, 123, 255, 0.4);
+}
+
+.glow-green {
+  box-shadow: 0 0 15px rgba(124, 255, 178, 0.4);
+}
+
+.glow-coral {
+  box-shadow: 0 0 15px rgba(255, 107, 154, 0.4);
+}
+
+/* Sonar Ripple Keyframes */
+@keyframes sonar-ring {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.animate-sonar {
+  animation: sonar-ring 3s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+}
+
+/* Breathing Bioluminescence Pulse */
+@keyframes biolume-pulse {
+  0%, 100% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 4px rgba(63, 242, 230, 0.3));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(63, 242, 230, 0.8));
+  }
+}
+
+.animate-pulse-biolume {
+  animation: biolume-pulse 3.5s ease-in-out infinite;
+}
+
+/* Focus Dive Mode Backdrop (for reading and quizzing) */
+.focus-dive-mode {
+  background: radial-gradient(ellipse at 50% 20%, #071426 0%, #03060B 80%);
+}
+
+/* Custom Scrollbar for Deep Sea Cockpit */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #03060B;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0A2A33;
+  border-radius: 3px;
+  border: 1px solid rgba(63, 242, 230, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3FF2E6;
+}
